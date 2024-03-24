@@ -18,7 +18,7 @@ from typing import Optional
 import torch
 from torch import nn, Tensor
 
-from util.misc import inverse_sigmoid
+from sahi.models.dino.util.misc import inverse_sigmoid
 from .utils import gen_encoder_output_proposals, MLP,_get_activation_fn, gen_sineembed_for_position
 from .ops.modules import MSDeformAttn
 
