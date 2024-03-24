@@ -97,11 +97,11 @@ class DINODetectionModel(DetectionModel):
         import torch, json
         import numpy as np
 
-        from DINO.main import build_model_main
-        from DINO.util.slconfig import SLConfig
-        from DINO.datasets import build_dataset
-        from DINO.util.visualizer import COCOVisualizer
-        from DINO.util import box_ops
+        from dino.main import build_model_main
+        from dino.util.slconfig import SLConfig
+        from dino.datasets import build_dataset
+        from dino.util.visualizer import COCOVisualizer
+        from dino.util import box_ops
 
         try:
             args = SLConfig.fromfile(config)
