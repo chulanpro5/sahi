@@ -15,7 +15,7 @@ from tqdm import tqdm
 
 from sahi.annotation import BoundingBox, Mask
 from sahi.utils.coco import Coco, CocoAnnotation, CocoImage, create_coco_dict
-from sahi.utils.cv import IMAGE_EXTENSIONS_LOSSLESS, IMAGE_EXTENSIONS_LOSSY, read_image_as_pil
+from sahi.utils.cv import IMAGE_EXTENSIONS_LOSSLESS, IMAGE_EXTENSIONS_LOSSY, read_image_as_pil, read_image
 from sahi.utils.file import load_json, save_json
 
 logger = logging.getLogger(__name__)
@@ -418,6 +418,7 @@ def slice_coco(
     ignore_negative_samples: bool = False,
     slice_height: int = 512,
     slice_width: int = 512,
+    slice_ratio: float = 2,
     overlap_height_ratio: float = 0.2,
     overlap_width_ratio: float = 0.2,
     min_area_ratio: float = 0.1,
@@ -471,13 +472,17 @@ def slice_coco(
         # get annotation json list corresponding to selected coco image
         # slice image
         try:
+            img = read_image(image_path)
+            w, h, _ = img.shape
+            slice_size = int(max(w, h) // slice_ratio)
+
             slice_image_result = slice_image(
                 image=image_path,
                 coco_annotation_list=coco_image.annotations,
                 output_file_name=f"{Path(coco_image.file_name).stem}_{idx}",
                 output_dir=output_dir,
-                slice_height=slice_height,
-                slice_width=slice_width,
+                slice_height=slice_size,
+                slice_width=slice_size,
                 overlap_height_ratio=overlap_height_ratio,
                 overlap_width_ratio=overlap_width_ratio,
                 min_area_ratio=min_area_ratio,
