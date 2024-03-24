@@ -97,11 +97,11 @@ class DINODetectionModel(DetectionModel):
         import torch, json
         import numpy as np
 
-        from dino.main import build_model_main
-        from dino.util.slconfig import SLConfig
-        from dino.datasets import build_dataset
-        from dino.util.visualizer import COCOVisualizer
-        from dino.util import box_ops
+        from sahi.models.dino.main import build_model_main
+        from sahi.models.dino.util.slconfig import SLConfig
+        from sahi.models.dino.datasets import build_dataset
+        from sahi.models.dino.util.visualizer import COCOVisualizer
+        from sahi.models.dino.util import box_ops
 
         try:
             args = SLConfig.fromfile(config)
