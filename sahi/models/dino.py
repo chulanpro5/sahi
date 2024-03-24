@@ -174,7 +174,7 @@ class DINODetectionModel(DetectionModel):
         preds_xyxy = []
         for box, score, label in zip(new_boxes, scores, labels):
             if score >= self.confidence_threshold:
-                preds_xyxy.append([box[0], box[1], box[2], box[3], float(score), int(label)])
+                preds_xyxy.append([box[0], box[1], (box[2]-box[0]), (box[3]-box[1]), float(score), int(label)])
 
         self._original_predictions = [preds_xyxy]
 
